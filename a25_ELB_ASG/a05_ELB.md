@@ -1,4 +1,4 @@
-
+`EC2 > Load Balancers`
 
 # Use of ELB
     
@@ -11,11 +11,7 @@
 7. High availability across zones
 8. Separate public traffic from private traffic
 
----
 
-# How to?
-
-`EC2 > Load Balancers`
 
 ---
 
