@@ -13,8 +13,6 @@
 
 
 
----
-
 # ELB features
 
 1. **Is a managed load balancer**
@@ -26,7 +24,6 @@
    
 4. ELB can be set as private (internal) or public (external)
 
----
 
 # Four types
 
@@ -134,8 +131,6 @@
 7. How to view cookie
    1. Chrome > Dev tools > Network > Cookies
 
----
-
 
 # Cross-Zone laod balancing
 
@@ -162,8 +157,6 @@
       1. To view: > Attributes
       2. To edit: > Listeners > _Target_Group > Attributes > Edit
 
-
----
 
 # Elastic load balancer - SSL Certificates
 
