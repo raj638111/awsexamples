@@ -55,12 +55,14 @@
         
 1. Features
    1. Is Layer 4 load balancer
-   2. Can be used to forward TCP, TLS, UDP traffic to your instances 
-   3. Handles millions of requests per second
-   4. Ultra low latency
-   5. Has one static IP per AZ & supports assigning elastic IP to each AZ
+   2. Can be used to forward TCP, TLS, UDP traffic to your instances
+   3. Supports TCP, HTTP & HTTPS health checks
+   4. Handles millions of requests per second
+   5. Ultra low latency
+   6. Provides both DNS name & Static IP (Helps with accessing the NLB event when underlying infra changes) per AZ
+   7. Has one static IP per AZ (So, we can assign elastic IP to the static IP)
       1. Can be used to expose our application with set of static IPs (Elastic IPs)
-   6. Health check supports target groups of: TCP, HTTP & HTTPS
+   8. Health check supports target groups of: TCP, HTTP & HTTPS
 2. Target Groups can be,
    1. EC2 instances
    2. IP Addresses (Must be private IPs)
@@ -170,7 +172,7 @@
    1. When setting up HTTPS listener specify the default certificate
    2. We can add optional list of certs to support multiple domains
    3. Clients can use `SNI` (`Server Name Indication`) to specify the hostname they reach
-      1. SNI: Solves problem of loading multiple SSL certificates into one Server (to serve multiple websites)
+      1. SNI: Solves problem of loading multiple SSL certificates into one Server (to serve multiple websites) (Note: multiple cetificates in a single listener)
       2. Is a newer protocol and require the client to indicate the host name of the target server in the initial SSL handshake
       3. Only works for ALB, NLB (and CloudFront) 
 5. SSL Certificate support
@@ -183,3 +185,13 @@
    3. NLB (V2)
       1. Supports multiple listeners with multiple SSL certificates
       2. Uses SNI to make it work
+
+# `Connection Draining`
+
+1. With ALB & NLB: Called as `Deregistration delay`
+2. With CLB: Called as `Connection Draining`
+3. What is it?
+   1. Is the time to complete inflight requests while the instance is deregistering or unhealthy
+   2. Once the connection is drained ELB will stop sending request to the EC2 instance which is deregistering
+   3. Can be set b/w `1 to 3600` seconds (Default: `300 seconds`)
+   4. Can be disabled with `0`
